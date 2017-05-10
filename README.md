@@ -1,4 +1,5 @@
-# Frontend `1.0.1`
+`v1.0.1`
+# Frontend
 Среда сборки frontend проекта (Gulp, Sass, jQuery, BrowserSync).
 
 ## Установка
