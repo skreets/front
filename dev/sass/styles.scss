@@ -3,10 +3,11 @@
 // Variables
 @import 'variables/color';
 
-// Mixin
+// Mixin 
 @import 'mixin/fonts';
 @import 'mixin/css3';
 @import 'mixin/gradient';
+@import 'mixin/respond';
 
 // Page
 @import 'page/reset';
