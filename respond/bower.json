@@ -1,0 +1,19 @@
+{
+  "name": "skreets_frontend",
+  "description": "Среда сборки frontend проекта",
+  "main": "",
+  "authors": [
+    "Alexander [skreets] Zharikov <mail@skreets.ru>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/skreets/front",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "jquery": "2.*"
+  }
+}
