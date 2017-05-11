@@ -16,6 +16,3 @@ at getBinding (/Users/username/front/node_modules/gulp-sass/node_modules/node-sa
 ``` 
 `npm uninstall --save-dev gulp-sass` - шаг 1  
 `npm install --save-dev gulp-sass@2` - шаг 2
-
-## Демо
-[Базовый](http://frontend.skreets.ru)  
