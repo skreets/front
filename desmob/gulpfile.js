@@ -61,7 +61,7 @@ var path = {
 		},
 		src: {
 			html:  'dev/desktop/*.html',
-			js:   'dev/js/jquery_desktop.js',
+			js:    'dev/js/jquery_desktop.js',
 			jsp:   'dev/js/desktop/**/*.*',
 			style: 'dev/sass/desktop.scss',
 			img:   'dev/img/**/*.*',
@@ -71,7 +71,7 @@ var path = {
 		},
 		watch: {
 			html:  'dev/desktop/**/*.html',
-			js:   'dev/js/jquery_desktop.js',
+			js:    'dev/js/jquery_desktop.js',
 			jsp:   'dev/js/desktop/**/*.*',
 			style: 'dev/**/*.scss',
 			img:   'dev/img/**/*.*',

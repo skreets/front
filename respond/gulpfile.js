@@ -16,25 +16,34 @@ var gulp = require('gulp'),
 
 var path = {
 	build: {
-		html: 'prod/',
-		js: 'prod/static/js/',
-		css: 'prod/static/css/',
-		img: 'prod/static/img/',
-		fonts: 'prod/static/fonts/'
+		html:  'prod/',
+		js:    'prod/static/js/',
+		jsp:   'prod/static/js/page',
+		lib:   'prod/static/js/lib',
+		css:   'prod/static/css/',
+		img:   'prod/static/img/',
+		fonts: 'prod/static/fonts/',
+		ajax:  'prod/data/ajax'
 	},
 	src: {
-		html: 'dev/*.html',
-		js: 'dev/js/script.js',
+		html:  'dev/*.html',
+		js:    'dev/js/jquery.js',
+		jsp:   'dev/js/page/*.*',
+		lib:   'dev/js/lib/**/*.*',
 		style: 'dev/sass/styles.scss',
-		img: 'dev/img/**/*.*',
-		fonts: 'dev/fonts/**/*.*'
+		img:   'dev/img/**/*.*',
+		fonts: 'dev/fonts/**/*.*',
+		ajax:  'dev/data/ajax/**/*.*'
 	},
 	watch: {
-		html: 'dev/**/*.html',
-		js: 'dev/js/**/*.js',
+		html:  'dev/**/*.html',
+		js:    'dev/js/jquery_desktop.js',
+		jsp:   'dev/js/page/*.*',
+		lib:   'dev/js/lib/**/*.*',
 		style: 'dev/sass/**/*.scss',
-		img: 'dev/img/**/*.*',
-		fonts: 'dev/fonts/**/*.*'
+		img:   'dev/img/**/*.*',
+		fonts: 'dev/fonts/**/*.*',
+		ajax:  'dev/data/ajax/**/*.*'
 	},
 	clean: './prod'
 };
@@ -74,6 +83,26 @@ gulp.task('js:build', function () {
 		.pipe(reload({stream: true}));
 });
 
+gulp.task('jsp:build', function () {
+	gulp.src(path.src.jsp) 
+		.pipe(rigger()) 
+		.pipe(sourcemaps.init()) 
+		.pipe(uglify()) 
+		.pipe(sourcemaps.write()) 
+		.pipe(gulp.dest(path.build.jsp))
+		.pipe(reload({stream: true}));
+});
+
+gulp.task('lib:build', function () {
+	gulp.src(path.src.lib) 
+		.pipe(rigger()) 
+		.pipe(sourcemaps.init()) 
+		.pipe(uglify()) 
+		.pipe(sourcemaps.write()) 
+		.pipe(gulp.dest(path.build.lib))
+		.pipe(reload({stream: true}));
+});
+
 gulp.task('style:build', function () {
 	gulp.src(path.src.style) 
 		.pipe(sourcemaps.init())
@@ -107,12 +136,22 @@ gulp.task('fonts:build', function() {
 		.pipe(gulp.dest(path.build.fonts))
 });
 
+gulp.task('ajax:build', function () {
+	gulp.src(path.src.ajax) 
+		.pipe(rigger())
+		.pipe(gulp.dest(path.build.ajax))
+		.pipe(reload({stream: true}));
+});
+
 gulp.task('build', [
 	'html:build',
 	'js:build',
+	'jsp:build',
+	'lib:build',
 	'style:build',
 	'fonts:build',
-	'image:build'
+	'image:build',
+	'ajax:build'
 ]);
 
 gulp.task('watch', function(){
@@ -125,11 +164,20 @@ gulp.task('watch', function(){
 	watch([path.watch.js], function(event, cb) {
 		gulp.start('js:build');
 	});
+	watch([path.watch.jsp], function(event, cb) {
+		gulp.start('jsp:build');
+	});
+	watch([path.watch.lib], function(event, cb) {
+		gulp.start('lib:build');
+	});
 	watch([path.watch.img], function(event, cb) {
 		gulp.start('image:build');
 	});
 	watch([path.watch.fonts], function(event, cb) {
 		gulp.start('fonts:build');
+	});
+	watch([path.watch.html], function(event, cb) {
+		gulp.start('ajax:build');
 	});
 });
 
