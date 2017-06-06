@@ -6,7 +6,7 @@
     "Alexander [skreets] Zharikov <mail@skreets.ru>"
   ],
   "license": "ISC",
-  "homepage": "https://github.com/skreets/front",
+  "homepage": "https://github.com/skreets/frontend",
   "private": true,
   "ignore": [
     "**/.*",

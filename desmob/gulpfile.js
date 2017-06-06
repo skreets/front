@@ -17,53 +17,67 @@ var gulp = require('gulp'),
 var path = {
 	mobile: {
 		build: {
-			html: 'prod/mobile/',
-			js: 'prod/mobile/static/js/',
-			css: 'prod/mobile/static/css/',
-			img: 'prod/mobile/static/img/',
-			fonts: 'prod/mobile/static/fonts/'
+			html:  'prod/mobile',
+			js: 	 'prod/static/js',
+			jsp:   'prod/static/js/mobile',
+			css:   'prod/static/css',
+			img:   'prod/static/img',
+			fonts: 'prod/static/fonts',
+			lib:   'prod/static/js/lib',
+			ajax:  'prod/data/ajax'
 		},
 		src: {
-			html: 'dev/mobile/*.html',
-			js: 'dev/js/mobile.js',
+			html:  'dev/mobile/*.html',
+			js:   'dev/js/jquery_mobile.js',
+			jsp:   'dev/js/mobile/**/*.*',
 			style: 'dev/sass/mobile.scss',
-			img: 'dev/mobile/img/**/*.*',
-			fonts: 'dev/fonts/**/*.*'
+			img:   'dev/img/**/*.*',
+			fonts: 'dev/fonts/**/*.*',
+			lib:   'dev/js/lib/**/*.*',
+			ajax:  'dev/data/ajax/**/*.*'
 		},
 		watch: {
-			html: 'dev/mobile/**/*.html',
-			js: 'dev/js/**/*.js',
-			js: 'dev/mobile/js/**/*.js',
-			style: 'dev/sass/**/*.scss',
-			style: 'dev/mobile/sass/**/*.scss',
-			img: 'dev/mobile/img/**/*.*',
-			fonts: 'dev/fonts/**/*.*'
+			html:  'dev/mobile/**/*.html',
+			js:   'dev/js/jquery_mobile.js',
+			jsp:   'dev/js/mobile/**/*.*',
+			style: 'dev/**/*.scss',
+			img:   'dev/img/**/*.*',
+			fonts: 'dev/fonts/**/*.*',
+			lib:   'dev/js/lib/**/*.*',
+			ajax:  'dev/data/ajax/**/*.*'
 		},
 		clean: './prod'
 	},
 	desktop: {
 		build: {
-			html: 'prod/desktop/',
-			js: 'prod/desktop/static/js/',
-			css: 'prod/desktop/static/css/',
-			img: 'prod/desktop/static/img/',
-			fonts: 'prod/desktop/static/fonts/'
+			html:  'prod/desktop',
+			js: 	 'prod/static/js',
+			jsp:   'prod/static/js/desktop',
+			css:   'prod/static/css',
+			img:   'prod/static/img',
+			fonts: 'prod/static/fonts',
+			lib:   'prod/static/js/lib',
+			ajax:  'prod/data/ajax/'
 		},
 		src: {
-			html: 'dev/desktop/*.html',
-			js: 'dev/js/desktop.js',
+			html:  'dev/desktop/*.html',
+			js:   'dev/js/jquery_desktop.js',
+			jsp:   'dev/js/desktop/**/*.*',
 			style: 'dev/sass/desktop.scss',
-			img: 'dev/desktop/img/**/*.*',
-			fonts: 'dev/fonts/**/*.*'
+			img:   'dev/img/**/*.*',
+			fonts: 'dev/fonts/**/*.*',
+			lib:   'dev/js/lib/**/*.*',
+			ajax:  'dev/data/ajax/**/*.*'
 		},
 		watch: {
-			html: 'dev/desktop/**/*.html',
-			js: 'dev/js/**/*.js',
-			js: 'dev/desktop/js/**/*.js',
-			style: 'dev/sass/**/*.scss',
-			style: 'dev/desktop/**/*.scss',
-			img: 'dev/desktop/img/**/*.*',
-			fonts: 'dev/fonts/**/*.*'
+			html:  'dev/desktop/**/*.html',
+			js:   'dev/js/jquery_desktop.js',
+			jsp:   'dev/js/desktop/**/*.*',
+			style: 'dev/**/*.scss',
+			img:   'dev/img/**/*.*',
+			fonts: 'dev/fonts/**/*.*',
+			lib:   'dev/js/lib/**/*.*',
+			ajax:  'dev/data/ajax/**/*.*'
 		},
 		clean: './prod'
 	}
@@ -94,6 +108,14 @@ gulp.task('html:build', function () {
 			.pipe(rigger())
 			.pipe(gulp.dest(path[item].build.html))
 			.pipe(reload({stream: true}));
+	}
+});
+
+gulp.task('jsp:build', function() {
+	for(var item in path) {
+		console.log(path[item].src.jsp, path[item].build.jsp);
+		gulp.src(path[item].src.jsp)
+			.pipe(gulp.dest(path[item].build.jsp));
 	}
 });
 
@@ -152,12 +174,31 @@ gulp.task('fonts:build', function() {
 	}
 });
 
+gulp.task('lib:build', function() {
+	for(var item in path) {
+		console.log(path[item].src.lib, path[item].build.lib);
+		gulp.src(path[item].src.lib)
+			.pipe(gulp.dest(path[item].build.lib));
+	}
+});
+
+gulp.task('ajax:build', function() {
+	for(var item in path) {
+		console.log(path[item].src.ajax, path[item].build.ajax);
+		gulp.src(path[item].src.ajax)
+			.pipe(gulp.dest(path[item].build.ajax));
+	}
+});
+
 gulp.task('build', [
 	'html:build',
 	'js:build',
+	'jsp:build',
 	'style:build',
 	'fonts:build',
-	'image:build'
+	'image:build',
+	'lib:build',
+	'ajax:build'
 ]);
 
 gulp.task('watch', function(){
@@ -167,17 +208,23 @@ gulp.task('watch', function(){
 	watch([path.desktop.watch.html], function(event, cb) {
 		gulp.start('html:build');
 	});
-	watch([path.mobile.watch.style], function(event, cb) {
-		gulp.start('style:build');
-	});
-	watch([path.desktop.watch.style], function(event, cb) {
-		gulp.start('style:build');
-	});
 	watch([path.mobile.watch.js], function(event, cb) {
 		gulp.start('js:build');
 	});
 	watch([path.desktop.watch.js], function(event, cb) {
 		gulp.start('js:build');
+	});
+	watch([path.mobile.watch.jsp], function(event, cb) {
+		gulp.start('jsp:build');
+	});
+	watch([path.desktop.watch.jsp], function(event, cb) {
+		gulp.start('jsp:build');
+	});
+	watch([path.mobile.watch.style], function(event, cb) {
+		gulp.start('style:build');
+	});
+	watch([path.desktop.watch.style], function(event, cb) {
+		gulp.start('style:build');
 	});
 	watch([path.mobile.watch.img], function(event, cb) {
 		gulp.start('image:build');
@@ -190,6 +237,18 @@ gulp.task('watch', function(){
 	});
 	watch([path.desktop.watch.fonts], function(event, cb) {
 		gulp.start('fonts:build');
+	});
+	watch([path.mobile.watch.lib], function(event, cb) {
+		gulp.start('lib:build');
+	});
+	watch([path.desktop.watch.lib], function(event, cb) {
+		gulp.start('lib:build');
+	});
+	watch([path.mobile.watch.ajax], function(event, cb) {
+		gulp.start('ajax:build');
+	});
+	watch([path.desktop.watch.ajax], function(event, cb) {
+		gulp.start('ajax:build');
 	});
 });
 
