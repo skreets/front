@@ -1,0 +1,7 @@
+@import "../../../node_modules/sass-font-face/_font-face.scss";
+
+$futura-normal: 'Futura Normal'; 
+$futura-light: 'Futura Light';
+ 
+@include font-face($futura-normal, '../fonts/futura/', 'FuturaNormal', 'FuturaNormal');
+@include font-face($futura-light, '../fonts/futura/', 'FuturaLight', 'FuturaLight');
