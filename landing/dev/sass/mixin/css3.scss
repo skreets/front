@@ -16,6 +16,38 @@
 	filter: blur($blur);
 }
 
+@mixin placeholder($color, $opacity) {
+	::-webkit-input-placeholder {
+		color: $color;
+		opacity: $opacity;
+	}
+	:-ms-input-placeholder {
+		color: $color;
+		opacity: $opacity;
+	}
+	::-moz-placeholder {
+		color: $color;
+		opacity: $opacity;
+	}
+	:-moz-placeholder {
+		color: $color;
+		opacity: $opacity;
+	}
+}
+
+@mixin _clearfix {
+	&:after {
+		clear: both;
+		content: ' ';
+		display: block;
+		font-size: 0;
+		line-height: 0;
+		visibility: hidden;
+		width: 0;
+		height: 0;
+	}
+}
+
 @mixin column($column, $gap) {
 	-moz-column-count: $column;
 	-moz-column-gap: $gap;
@@ -42,6 +74,14 @@
 	-moz-transition-delay: 		$delay;
 	transition: 							$transition;
 	transition-delay: 				$delay;
+}
+
+@mixin transform($transform) {
+	-moz-transform: $transform;
+	-webkit-transform: $transform;
+	-o-transform: $transform;
+	-ms-transform: $transform;
+	transform: $transform;
 }
 
 @mixin user-select($uselect) {
