@@ -1,7 +1,10 @@
 .DS_Store
 /respond/bower_components
 /respond/node_modules
+/respond/prod
 /desmob/bower_components
 /desmob/node_modules
+/desmob/prod
 /landing/bower_components
 /landing/node_modules
+/landing/prod
