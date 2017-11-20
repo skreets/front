@@ -21,7 +21,8 @@ section {
 
 		span {
 			color: $green;
-			padding: 0 2px;
+			padding: 0 5px;
+			margin-left: -2px;
 			background: #000;
 		}
 	}
@@ -29,7 +30,7 @@ section {
 	p {
 		font-size: 24px;
 		line-height: 39px;
-		font-family: $futura-light;
+		font-family: $pn-t;
 		text-align: center;
 
 		span {
@@ -52,7 +53,7 @@ section {
 
 			a {
 				font-size: 18px;
-				font-family: $futura-light;
+				font-family: $pn-t;
 				color: $green-2;
 				text-decoration: none;
 				@include transition;
@@ -65,7 +66,9 @@ section {
 			&:after {
 				content: '•';
 				font: 10px Verdana;
-				margin: 0 20px;
+				display: inline-block;
+				vertical-align: top;
+				margin: 3px 20px 0;
 			}
 
 			&:last-child {
