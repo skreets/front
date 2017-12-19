@@ -1,4 +1,4 @@
-`v2.1.0`
+`v2.2.0`
 # Frontend
 Среда сборки frontend проекта (Gulp, Sass, jQuery, BrowserSync).
 
